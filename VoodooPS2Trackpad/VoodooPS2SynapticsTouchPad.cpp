@@ -822,7 +822,7 @@ void ApplePS2SynapticsTouchPad::onScrollTimer(void)
     if (abs(dy) > momentumscrollthreshy)
     {
         // dispatch the scroll event
-        dispatchScrollWheelEventX(wvdivisor ? dy / wvdivisor : 0, 0, 0, now_abs);
+        dispatchScrollWheelEventX(wvdivisor ? -dy / wvdivisor : 0, 0, 0, now_abs);
         momentumscrollrest2 = wvdivisor ? dy % wvdivisor : 0;
     
         // adjust momentumscrollcurrent
@@ -1713,7 +1713,7 @@ void ApplePS2SynapticsTouchPad::dispatchEventsWithPacket(UInt8* packet, UInt32 p
                 }
                 if (0 != dy || 0 != dx)
                 {
-                    dispatchScrollWheelEventX(wvdivisor ? dy / wvdivisor : 0, (whdivisor && hscroll) ? dx / whdivisor : 0, 0, now_abs);
+                    dispatchScrollWheelEventX(wvdivisor ? -dy / wvdivisor : 0, (whdivisor && hscroll) ? -dx / whdivisor : 0, 0, now_abs);
                     ////IOLog("ps2: dx=%d, dy=%d (%d,%d) z=%d w=%d\n", dx, dy, x, y, z, w);
                     dx = dy = 0;
                 }
